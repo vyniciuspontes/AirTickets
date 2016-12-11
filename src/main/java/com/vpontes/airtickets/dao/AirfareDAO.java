@@ -3,20 +3,20 @@ package com.vpontes.airtickets.dao;
 
 import com.vpontes.airtickets.dao.utils.HibernateUtil;
 import com.vpontes.airtickets.model.generated.Airfare;
-import com.vpontes.airtickets.model.generated.Airport;
 import com.vpontes.airtickets.model.generated.AirportFlight;
 import com.vpontes.airtickets.model.generated.Flight;
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.persistence.criteria.SetJoin;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 /**
  *
@@ -61,7 +61,8 @@ public class AirfareDAO extends BaseDAO{
         }
     }
     
-    public List<Airfare> findByAirport(int originAirportId, int destinationAirportId){
+    public List<Airfare> findByAirport(int originAirportId, int destinationAirportId,
+            DateTime date, Integer passangersNumber){
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -84,9 +85,22 @@ public class AirfareDAO extends BaseDAO{
         Predicate p3 = builder.and(builder.equal(afs2.get("airport").get("id"), destinationAirportId), 
                 builder.equal(afs2.get("airportFlightProfile").get("id"), 2));
 
-        Predicate p4 = builder.and(p1, p2, p3);
+        LocalDate gt = new LocalDate(date);
+        Path<Date> dateCreatedPath = fRoot.get("departureTime");
+        Predicate p4 = builder.greaterThanOrEqualTo(dateCreatedPath, gt.toDate());
+        LocalDate lt = new LocalDate(date).plusDays(1);
+        Predicate p5 = builder.lessThanOrEqualTo(dateCreatedPath, lt.toDate());
+        
+        Predicate p6 = builder.and(p4,p5);
+        
+        Path<Integer> passangersPath = airfareRoot.get("avaliable");
+        Predicate p7 = builder.greaterThanOrEqualTo(passangersPath, passangersNumber);
+        
+        Predicate p8 = builder.and(p1, p2, p3, p6, p7);
+        
+        
 
-        query.select(airfareRoot).where(p4);
+        query.select(airfareRoot).where(p8);
 
         List<Airfare> resultList = session.createQuery(query).getResultList();
 

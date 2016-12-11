@@ -106,11 +106,13 @@ public class MainServletFilter implements Filter {
             if(DEBUG)
                 log("Starting a database transaction");
             Session s = sessionFactory.getCurrentSession();
-            s.beginTransaction();
+            if(!s.getTransaction().isActive())
+                s.beginTransaction();
             chain.doFilter(request, response);
             if(DEBUG)
                 log("Commit transaction");
-            s.getTransaction().commit();
+            if(s.getTransaction().isActive())
+                s.getTransaction().commit();
             
         }   catch (HibernateException | IOException | ServletException ex) {  
             try {

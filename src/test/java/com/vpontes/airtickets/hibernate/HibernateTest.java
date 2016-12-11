@@ -49,12 +49,12 @@ public class HibernateTest {
         
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         
-        s.beginTransaction();
+        //s.beginTransaction();
         
-        new AirfareDAO().findByAirport(1, 2);
+        //new AirfareDAO().findByAirport(1, 2);
         
         //System.out.println(airfare.getPrice());
         
-        s.getTransaction().commit();
+        //s.getTransaction().commit();
     }
 }

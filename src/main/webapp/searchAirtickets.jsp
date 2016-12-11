@@ -13,14 +13,13 @@
     </head>
     <body>
         <h1>Pesquisa de passagens</h1>
-        <form action="Server/Service/AirfareWS">
+        <form action="Server/Service/AirfareWS" method="post">
             Aeroporto de origem: <input type="text" name="originAirport"><br/>
             Aeroporto de partida: <input type="text" name="destinationAirport"><br/>
             Número de pessoas: <input type="number" name="passangersNumber"><br/>
-            
+            Date de Ida <input type="date" name="goDate"><br/>
+            Date de Volta <input type="date" name="backDate">
             <input type="submit" name="Submit">
         </form>
-        
-        
     </body>
 </html>
