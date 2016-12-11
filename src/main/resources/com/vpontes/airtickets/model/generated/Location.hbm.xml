@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/12/2016 19:17:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.vpontes.airtickets.model.generated.Location" table="location" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="city" type="string">
+            <column name="city" length="30" not-null="true" />
+        </property>
+        <property name="state" type="string">
+            <column name="state" length="30" not-null="true" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="30" not-null="true" />
+        </property>
+        <set name="airports" table="airport" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="location_id" not-null="true" />
+            </key>
+            <one-to-many class="com.vpontes.airtickets.model.generated.Airport" />
+        </set>
+    </class>
+</hibernate-mapping>

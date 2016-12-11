@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="air_tickets" match-schema="public"/>
+  <table-filter match-name="booking"/>
+  <table-filter match-name="location"/>
+  <table-filter match-name="seat_profile"/>
+  <table-filter match-name="user_system"/>
+  <table-filter match-name="airport_flight"/>
+  <table-filter match-name="airport_flight_profile"/>
+  <table-filter match-name="passanger"/>
+  <table-filter match-name="order_booking"/>
+  <table-filter match-name="airfare"/>
+  <table-filter match-name="airfare_profile"/>
+  <table-filter match-name="airport"/>
+  <table-filter match-name="flight"/>
+</hibernate-reverse-engineering>

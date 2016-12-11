@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/air_tickets</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">123</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <!-- Disable the second-level cache -->
+    <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+    <!-- Echo all executed SQL to stdout -->
+    <property name="show_sql">true</property>
+    <mapping resource="com/vpontes/airtickets/model/generated/OrderBooking.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/AirportFlight.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/SeatProfile.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/Booking.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/Flight.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/Location.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/Airfare.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/UserSystem.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/Airport.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/AirportFlightProfile.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/Passanger.hbm.xml"/>
+    <mapping resource="com/vpontes/airtickets/model/generated/AirfareProfile.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

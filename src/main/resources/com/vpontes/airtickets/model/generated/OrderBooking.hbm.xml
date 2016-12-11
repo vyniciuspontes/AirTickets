@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/12/2016 19:17:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.vpontes.airtickets.model.generated.OrderBooking" table="order_booking" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="com.vpontes.airtickets.model.generated.OrderBookingId">
+            <key-property name="id" type="int">
+                <column name="id" />
+            </key-property>
+            <key-property name="userSystemId" type="int">
+                <column name="user_system_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="userSystem" class="com.vpontes.airtickets.model.generated.UserSystem" update="false" insert="false" fetch="select">
+            <column name="user_system_id" not-null="true" />
+        </many-to-one>
+        <property name="quantity" type="int">
+            <column name="quantity" not-null="true" />
+        </property>
+        <property name="totalPrice" type="big_decimal">
+            <column name="total_price" precision="131089" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

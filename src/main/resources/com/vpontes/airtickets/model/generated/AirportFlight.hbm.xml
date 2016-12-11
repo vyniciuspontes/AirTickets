@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/12/2016 19:17:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.vpontes.airtickets.model.generated.AirportFlight" table="airport_flight" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="com.vpontes.airtickets.model.generated.AirportFlightId">
+            <key-property name="flightId" type="int">
+                <column name="flight_id" />
+            </key-property>
+            <key-property name="airportId" type="int">
+                <column name="airport_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="airport" class="com.vpontes.airtickets.model.generated.Airport" update="false" insert="false" fetch="select">
+            <column name="airport_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="airportFlightProfile" class="com.vpontes.airtickets.model.generated.AirportFlightProfile" fetch="select">
+            <column name="profile_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="flight" class="com.vpontes.airtickets.model.generated.Flight" update="false" insert="false" fetch="select">
+            <column name="flight_id" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
