@@ -13,21 +13,48 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Airfare List</title>
         <style>
-        td,th{
-            border: 1px solid #dddddd;
-            padding: 8px;
-        }
-        .radio{
-            border: 0px;
-        }
-        div {
-            margin: 10px;
-        }
-    </style>  
+            td,th{
+                border: 1px solid #dddddd;
+                padding: 8px;
+            }
+            .radio{
+                border: 0px;
+            }
+            div {
+                margin: 10px;
+            }
+            .loginText {
+                float: right;
+                padding-right: 100px;
+            }
+        </style>  
     </head>
     <body>
-        <form action="SaveAirfareWS" method="post">
-
+        <div class="loginText">
+            <c:choose>
+                <c:when test="${sessionScope.loginName != null}">
+                    <b>${sessionScope.loginName}</b>
+                </c:when>
+                <c:otherwise>
+                    <a href="/AirTickets/Login"> Fazer login</a>
+                    <!--<form name="submitForm" method="get" action="/AirTickets/Login">
+                        <input type="hidden" name="param1" value="param1Value">
+                        <A HREF="javascript:document.submitForm.submit()">Fazer Login</A>-->
+                    </form>
+                </c:otherwise>
+            </c:choose>
+        </div>
+        
+        <c:choose>
+            <c:when test="${sessionScope.loginName != null}">
+                <c:set var="serviceName" scope="request" value="ResumeAirfareWS"/>
+            </c:when>
+            <c:otherwise>
+                <c:set var="serviceName" scope="request" value="SaveChooseWS"/>
+            </c:otherwise>
+        </c:choose>
+                    
+        <form action="${serviceName}" method="get">
         <div>
             <h1>${param.originAirport} > ${param.destinationAirport} </h1>
         </div>
@@ -55,7 +82,7 @@
                     <td>${airfare.price}
                     </td>
                     <td class="radio" >
-                         <input type="radio" name="goGroup" value="${airfare.id}"><br/>
+                         <input type="radio" name="airfareGoId" value="${airfare.id}"><br/>
                     </td>
                 </tr>
             </c:forEach>
@@ -91,7 +118,7 @@
                     <td>${airfare.price}
                     </td>
                     <td class="radio" >
-                         <input type="radio" name="backGroup" value="${airfare.id}"><br/>
+                         <input type="radio" name="airfareBackId" value="${airfare.id}"><br/>
                     </td>
                 </tr>
             </c:forEach>

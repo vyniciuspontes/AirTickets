@@ -20,7 +20,7 @@ import javax.servlet.RequestDispatcher;
  *
  * @author vyniciuspontes
  */
-@WebServlet(name = "AirTickets", urlPatterns = {"/Server/*"})
+@WebServlet(name = "AirTickets", urlPatterns = {"/Checkin", "/Search", "/Login", "/Server/*"})
 public class MainServlet extends HttpServlet {
 
     /**
@@ -36,27 +36,32 @@ public class MainServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) 
             throws ClassNotFoundException, InstantiationException, IllegalAccessException, ServletException, IOException {
        
-        //String[] a = request.getParameterValues("passport");
-        
-        String path = request.getPathInfo();
-        
-        String[] pathContent = path.split("/");
-        
-        if(pathContent.length > 2){
+        String pathInfo = request.getPathInfo();
+        if(pathInfo != null) {
+            
+            String path = pathInfo;
+            String[] pathContent = path.split("/");
             
             if(pathContent[1].equals("Service")){
                 String wsName = pathContent[2];
                 String className = "com.vpontes.airtickets.webservices." + wsName;
-
                 Class currentClass = Class.forName(className);
                 WebService ws = (WebService) currentClass.newInstance();
                 ws.run(request, response);
             }
-        } else {
-            //RequestDispatcher dispatcher = request.getRequestDispatcher("/serverUp.jsp");
-            //dispatcher.forward(request, response);
+        } else if(request.getServletPath().equals("/Search")){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/searchAirtickets.jsp");
+            dispatcher.forward(request, response);
             
             //response.sendRedirect("AirTickets/serverUp.jsp");
+        }else if(request.getServletPath().equals("/Login")){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+            dispatcher.forward(request, response);
+            
+            //response.sendRedirect("AirTickets/serverUp.jsp");
+        }else if(request.getServletPath().equals("/Checkin")){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/checkin.jsp");
+            dispatcher.forward(request, response);
         }
     }
 

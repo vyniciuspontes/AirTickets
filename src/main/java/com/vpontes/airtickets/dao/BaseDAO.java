@@ -5,7 +5,7 @@
  */
 package com.vpontes.airtickets.dao;
 
-import com.vpontes.airtickets.model.generated.Airfare;
+import com.vpontes.airtickets.dao.utils.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -20,8 +20,12 @@ abstract public class BaseDAO {
     abstract public <X extends Object> X findById(Integer id);
     abstract public <X extends Object> List<X> findAll();
     
+    public BaseDAO(){
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+    }
+    
     public <X> void insert(X object) {
-        session.persist(object);
+        session.save(object);
         session.flush();
     }
 

@@ -5,17 +5,37 @@
  */
 package com.vpontes.airtickets.dao;
 
+import com.vpontes.airtickets.dao.utils.HibernateUtil;
+import com.vpontes.airtickets.model.generated.UserSystem;
 import java.util.List;
+import org.hibernate.query.Query;
 
 /**
  *
  * @author vyniciuspontes
  */
-public class UserSystem extends BaseDAO {
+public class UserSystemDAO extends BaseDAO {
 
+    public UserSystemDAO(){
+        super();
+    }
+    
     @Override
-    public <X> X findById(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public UserSystem findById(Integer id) {
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        return session.find(UserSystem.class, id);
+    }
+    
+    public UserSystem findByEmail(String email){
+        
+        Query q = session.createQuery("From UserSystem where email=:emailParameter");
+        
+        q.setParameter("emailParameter", email);
+        
+        UserSystem us = (UserSystem) q.uniqueResult();
+        
+        return us;
     }
 
     @Override

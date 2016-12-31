@@ -25,7 +25,7 @@ import org.joda.time.LocalDate;
 public class AirfareDAO extends BaseDAO{
     
     public AirfareDAO(){
-        
+        super();
     }
     
     @Override
@@ -46,7 +46,7 @@ public class AirfareDAO extends BaseDAO{
 
     @Override
     public List<Airfare> findAll() {
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        //session = HibernateUtil.getSessionFactory().getCurrentSession();
         
         try {
             CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -63,7 +63,7 @@ public class AirfareDAO extends BaseDAO{
     
     public List<Airfare> findByAirport(int originAirportId, int destinationAirportId,
             DateTime date, Integer passangersNumber){
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        //session = HibernateUtil.getSessionFactory().getCurrentSession();
         
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Airfare> query = builder.createQuery(Airfare.class);

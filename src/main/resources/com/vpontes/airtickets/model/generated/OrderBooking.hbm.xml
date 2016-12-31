@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 31/12/2016 15:45:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.vpontes.airtickets.model.generated.OrderBooking" table="order_booking" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="userSystem" class="com.vpontes.airtickets.model.generated.UserSystem" fetch="select">
+            <column name="user_system_id" not-null="true" />
+        </many-to-one>
+        <property name="quantity" type="int">
+            <column name="quantity" not-null="true" />
+        </property>
+        <property name="totalPrice" type="big_decimal">
+            <column name="total_price" precision="131089" scale="0" not-null="true" />
+        </property>
+        <set name="bookings" table="booking" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="order_booking_id" not-null="true" />
+            </key>
+            <one-to-many class="com.vpontes.airtickets.model.generated.Booking" />
+        </set>
+    </class>
+</hibernate-mapping>

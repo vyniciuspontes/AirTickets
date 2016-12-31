@@ -5,12 +5,9 @@
  */
 package com.vpontes.airtickets.webservices;
 
-import com.vpontes.airtickets.bo.PassangerBO;
 import com.vpontes.airtickets.dao.PassangerDAO;
 import com.vpontes.airtickets.model.generated.Passanger;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +50,7 @@ public class PassangerWS implements WebService{
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(PassangerBO.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(PassangerBO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

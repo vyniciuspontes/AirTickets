@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -25,10 +26,18 @@ public class HibernateUtil {
         try {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
-            return new MetadataSources(
+            //return new Configuration().configure().buildSessionFactory();
+           Configuration configuration = new Configuration().configure();
+            StandardServiceRegistryBuilder builder = 
+                    new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml");
+            SessionFactory factory = configuration.buildSessionFactory(builder.build());
+            
+            /*return new MetadataSources(
                 new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml").build()
-                ).buildMetadata().buildSessionFactory();
+                ).buildMetadata().buildSessionFactory();*/
+            
+            return factory;
         } catch (Throwable ex) {
             // Log the exception. 
             System.err.println("Initial SessionFactory creation failed." + ex);

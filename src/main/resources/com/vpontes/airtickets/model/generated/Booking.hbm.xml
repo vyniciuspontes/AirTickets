@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 31/12/2016 15:45:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.vpontes.airtickets.model.generated.Booking" table="booking" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="com.vpontes.airtickets.model.generated.BookingId">
+            <key-property name="passangerId" type="int">
+                <column name="passanger_id" />
+            </key-property>
+            <key-property name="airfareId" type="int">
+                <column name="airfare_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="airfare" class="com.vpontes.airtickets.model.generated.Airfare" update="false" insert="false" fetch="select">
+            <column name="airfare_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="orderBooking" class="com.vpontes.airtickets.model.generated.OrderBooking" fetch="select">
+            <column name="order_booking_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="passanger" class="com.vpontes.airtickets.model.generated.Passanger" update="false" insert="false" fetch="select">
+            <column name="passanger_id" not-null="true" />
+        </many-to-one>
+        <property name="checkIn" type="boolean">
+            <column name="check_in" not-null="true" />
+        </property>
+        <property name="seatCode" type="string">
+            <column name="seat_code" length="3" />
+        </property>
+    </class>
+</hibernate-mapping>

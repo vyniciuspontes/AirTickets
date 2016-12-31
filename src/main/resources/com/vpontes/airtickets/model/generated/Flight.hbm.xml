@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 31/12/2016 15:45:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.vpontes.airtickets.model.generated.Flight" table="flight" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="departureTime" type="timestamp">
+            <column name="departure_time" length="35" not-null="true" />
+        </property>
+        <property name="arrivalTime" type="timestamp">
+            <column name="arrival_time" length="35" not-null="true" />
+        </property>
+        <property name="hasConnection" type="java.lang.Boolean">
+            <column name="has_connection" />
+        </property>
+        <set name="airportFlights" table="airport_flight" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="flight_id" not-null="true" />
+            </key>
+            <one-to-many class="com.vpontes.airtickets.model.generated.AirportFlight" />
+        </set>
+        <set name="airfares" table="airfare" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="flight_id" not-null="true" />
+            </key>
+            <one-to-many class="com.vpontes.airtickets.model.generated.Airfare" />
+        </set>
+    </class>
+</hibernate-mapping>

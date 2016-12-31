@@ -6,25 +6,32 @@
 package com.vpontes.airtickets.webservices;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author vyniciuspontes
  */
-public class SaveAirfareWS implements WebService{
+public class SaveChooseWS implements WebService{
 
     @Override
     public void run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        String airfareGoId = request.getParameter("goGroup");
-        String airfareBackId = request.getParameter("backGroup");
-        Integer passangersNumber = Integer.valueOf(request.getParameter("passangersNumber"));
+        HttpSession session = request.getSession();
         
+        String query = request.getQueryString();
+        session.setAttribute("searchQuery", query);
+        
+        String path = "/AirTickets/Login";
+        response.sendRedirect(path);
+        
+        //RequestDispatcher rd = request.getRequestDispatcher("/Login");
+        
+        //rd.forward(request, response);
     }
-    
-    
     
 }

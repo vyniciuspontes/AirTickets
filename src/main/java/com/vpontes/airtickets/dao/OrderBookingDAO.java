@@ -13,6 +13,10 @@ import java.util.List;
  */
 public class OrderBookingDAO extends BaseDAO{
 
+    public OrderBookingDAO(){
+        super();
+    }
+    
     @Override
     public <X> X findById(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -20,21 +24,6 @@ public class OrderBookingDAO extends BaseDAO{
 
     @Override
     public <X> List<X> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <X> void insert(X object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <X> void update(X object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <X> void delete(X object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

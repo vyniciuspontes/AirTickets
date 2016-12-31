@@ -18,7 +18,9 @@ import javax.persistence.criteria.Root;
  */
 public class PassangerDAO extends BaseDAO{
 
-    
+    public PassangerDAO(){
+        super();
+    }
     
     @Override
     public <X> X findById(Integer id) {

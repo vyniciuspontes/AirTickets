@@ -16,10 +16,12 @@ import java.util.List;
  */
 public class FlightDAO extends BaseDAO{
 
+    public FlightDAO(){
+        super();
+    }
+    
     @Override
     public Flight findById(Integer id) {
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
-        
         //List<Airfare> result = session.createQuery("From Airfare").list();
         //Airfare airfare = result.get(0);
         Flight flight = session.find(Flight.class, id);

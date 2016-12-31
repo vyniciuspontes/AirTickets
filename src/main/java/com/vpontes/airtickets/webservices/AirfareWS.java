@@ -15,6 +15,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.joda.time.DateTime;
 
 /**
@@ -62,6 +63,7 @@ public class AirfareWS implements WebService{
         DateTime backDateTime = new DateTime(backDate);
         List<Airfare> airfareBackList = dao.findByAirport(airportDestination.getId(), 
                 airportOrigin.getId(), backDateTime, passangersNumber);
+        
         
         request.setAttribute("airfareBackList", airfareBackList);
         request.setAttribute("airfareGoList", airfareGoList);

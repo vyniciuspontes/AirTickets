@@ -8,9 +8,13 @@ package com.vpontes.airtickets.dao;
 import com.vpontes.airtickets.dao.utils.HibernateUtil;
 import com.vpontes.airtickets.model.generated.Airfare;
 import com.vpontes.airtickets.model.generated.Airport;
+import com.vpontes.airtickets.model.generated.AirportFlight;
+import com.vpontes.airtickets.model.generated.Flight;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -20,6 +24,10 @@ import javax.persistence.criteria.Root;
  */
 public class AirportDAO extends BaseDAO{
 
+    public AirportDAO(){
+        super();
+    }
+    
     @Override
     public <X> X findById(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -29,25 +37,8 @@ public class AirportDAO extends BaseDAO{
     public <X> List<X> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public <X> void insert(X object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <X> void update(X object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <X> void delete(X object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public Airport findByName(String name){
-        
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
         
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Airport> query = builder.createQuery(Airport.class);
@@ -59,6 +50,25 @@ public class AirportDAO extends BaseDAO{
         
         return session.createQuery(query).getSingleResult();
         
+    }
+    
+    public List<Airport> findByFlight(Integer flightId){
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Airport> query = builder.createQuery(Airport.class);
+        Root<Airport> airportRoot = query.from(Airport.class);
+        
+        Join<Airport, AirportFlight> afs1 = airportRoot.join("airportFlights");
+        
+        Predicate p1 = builder.equal(afs1.get("id").get("flightId"), flightId);
+        
+        Order o = builder.asc(afs1.get("airportFlightProfile").get("id"));
+        
+        query.select(airportRoot).where(p1).orderBy(o);
+        
+        List<Airport> result = session.createQuery(query).list();
+        
+        return result;
     }
     
 }
